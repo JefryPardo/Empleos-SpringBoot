@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+  <head th:insert="fragments/head :: head"></head>
+
+  <body>
+
+    <header th:insert="fragments/menu :: menu-principal"></header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Datos de la categoría</strong></h4>              
+          <div class="card-body">
+
+            <!-- Formulario -->
+            <form th:action="@{/categorias/save}" method="post" th:object="${categoria}">
+              <div th:if="${#fields.hasErrors('*')}"class='alert alert-danger' role='alert'>
+				        Por favor corrija los siguientes errores:
+				        <ul>
+				          <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+				        </ul>
+			        </div>              
+              <div class="row">
+                <div class="col-md-6"> 
+                  <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escriba el nombre de la categoria" required="required">
+                  </div>
+                </div>                
+              </div> 
+              <div class="row">
+                <div class="col-md-6"> 
+                  <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" name="descripcion" id="descripcion" rows="2"></textarea>
+                  </div> 
+                </div>                
+              </div> 
+              <hr>
+              <button type="submit" title="Guardar el registro." class="btn btn-primary">Guardar</button>  
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="footer" th:insert="fragments/footer :: pie-pag"></footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
+  </body>
+</html>
